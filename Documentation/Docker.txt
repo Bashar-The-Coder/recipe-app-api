@@ -1,0 +1,25 @@
+why use Docker
+
+consistent dev and prod environment
+if we use docker we dont need to same things in production or dev
+The all of our dependency project inside the docker image
+the other dev just install docker and run the image which
+
+first we will create Dockerfile which contains all the operating system dependency
+that our projects needs
+
+create Docker Compose configuration which tells
+Docker how to run the images that are created from our Dockerfile
+configuration
+
+we will run all commands via Docker Compose
+
+
+Dockerhub image
+
+we can get various image like python postgres etc from docker hub
+
+Authenticate with docker hub
+create account setup credential
+login before running job
+get 200 pulls/6hr for free

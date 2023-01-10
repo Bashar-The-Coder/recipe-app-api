@@ -1,0 +1,65 @@
+This api is about Receipe api
+Total endpoint 19
+feature-> mananing users, recipes, ingredients, user auth,
+Browsable Admin Interface django Admin
+Browsable API swagger for testing api
+
+API ENDPOINTS
+# health check. that means our api is correctly online or not
+
+
+# APP Structure
+app/ -Django Project
+app/core/ - code shared between multiple apps or helper fuction
+app/user - User related code
+app/recipe - Recipe related code
+
+# TDD - > Test Driven Development
+
+Unit Tests means A code which tests code
+you setup some condition/inputs then runs a piece of code
+checks outputs with assertion
+this is help to catch bugs
+
+write test before write code
+
+
+
+#recipes
+
+1. GET /api/Receipe/ingredients
+
+docker --version
+docker-compose version
+
+#for docker access token
+Copy Access Token
+When logging in from your Docker CLI client, use this token as a password. Learn more
+
+ACCESS TOKEN DESCRIPTION
+recipe-app-api
+ACCESS PERMISSIONS
+Read, Write, Delete
+To use the access token from your Docker CLI client:
+
+1. Run docker login -u 12345bashar
+
+2. At the password prompt, enter the personal access token.
+
+dckr_pat_QEMXFV6KYat5bfY_Rg_ZLsavR5E
+WARNING: This access token will only be displayed once. It will not be stored and cannot be retrieved. Please be sure to save it now.
+
+goto github->settings->secret 
+add Dockerhub user and dockerhub_token
+
+#03
+# run all commands throug docker compose
+docker-compose run --rm app sh -c "python manage.py collectstatic"
+
+#04
+# after that go to terminal and command docker build.
+# firs time it need some time
+#after docker compose edit we should run docker-compose build
+
+#05
+we should use flake 8 for linting tools

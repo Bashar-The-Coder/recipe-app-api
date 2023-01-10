@@ -1,0 +1,9 @@
+[flake8]
+# this exclude means that flake 8 please exclude these files
+# from linting
+
+exclude = 
+    migrations,
+    __pycache__,
+    manage.py,
+    setting.py
