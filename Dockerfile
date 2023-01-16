@@ -49,28 +49,49 @@
 # then we crate a dockerignore file
 
 # python docker and alpine linux docker
+# collect python and alpine linux image from dockerhub
+# alpine is very klight distro of linux ideal for docker container
 FROM python:3.9-alpine3.13
 # who maintain the project
 LABEL maintainer="Bashar"
 
+# this is recommended when we run the docker container
+# it tells python to dont buffered the output 
+# the output from python would be printed directly to the console which prevents any delay
 ENV PYTHONUNBUFFERED 1
 
+#  this line tells please copy the requirements.txt files to our docker tmp image folder
+
 COPY ./requirements.txt /tmp/requirements.txt
+# copy the requirements.dev.txt files to our docker tmp image folder
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
+# also copy app folder to docker app folder
 COPY ./app /app
+#  workdir is the working directory 
 WORKDIR /app
+
 EXPOSE 8000
 
 ARG DEV=false
+# This line create a new virtual environment to reduce any risk
 RUN python -m venv /py && \
+# full path of our venv and upgrade our pip
     /py/bin/pip install --upgrade pip && \
+    #  next we install our requirements.txt file
     /py/bin/pip install -r /tmp/requirements.txt && \
     if [ $DEV = "true" ]; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
+    #  then we remove our tmp directory. we dont need 
+    # any extra dependency on our image once be created
+    # best practices keep docker image as light as possible
     rm -rf /tmp && \
+    # inside our image add new user. its best practice dont use the root user
+    # dont run with root user in our application
+    #  we specified disable password because we dont want to login with password
     adduser \
         --disabled-password \
+        #  we dont neeed create home
         --no-create-home \
         # name of user of the container
         django-user
@@ -79,6 +100,7 @@ RUN python -m venv /py && \
 ENV PATH="/py/bin:$PATH"
 # when run docker the default user or last user is django-user
 # anytime that we run from our docker image the user will be django-user
+# switch to django-user
 USER django-user
 
 # then we crate a dockerignore file
